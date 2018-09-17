@@ -1,0 +1,175 @@
+[{
+	
+	"text": {
+		"name": "G1",
+		"threat": "T: Disclose",
+		"asset": "A: CCA",
+		"target": "E: store server A",
+		"interval": "I: ss"
+	},
+	"HTMLclass": "and",
+	"chileren": [{
+		"text": {
+			"name": "G2",
+			"threat": "T: Reach",
+			"asset": "A: store server A",
+			"target": "E: ",
+			"interval": "I: "
+		},
+		"HTMLclass": "or",
+		"chileren": [{
+			"text": {
+				"name": "G21",
+				"threat": "G21: Reach",
+				"asset": "G21: store server A",
+				"target": "E2: ",
+				"interval": "I2: "
+			},
+			"HTMLclass": "",
+			"chileren": [{
+			"text": {
+				"name": "G211",
+				"threat": "G211: Reach",
+				"asset": "G211: store server A",
+				"target": "E21: ",
+				"interval": "I21: "
+			},
+			"HTMLclass": "",
+			"chileren": null
+		      }]
+		}, {
+			"text": {
+				"name": "G22",
+				"threat": "G22: Reach",
+				"asset": "G22: store server A",
+				"target": "E2: ",
+				"interval": "I2: "
+			},
+			"chileren": null
+		}]
+	}, {
+		"text": {
+			"name": "G3",
+			"threat": "T: Reach",
+			"asset": "A: store server A",
+			"target": "E: ",
+			"interval": "I: "
+		},
+		"HTMLclass": "and",
+		"chileren": [{
+			"text": {
+				"name": "G3tttt",
+				"threat": "G311: Reach",
+				"asset": "G311: store server A",
+				"target": "E31: ",
+				"interval": "I31: "
+			},
+			"HTMLclass": "",
+			"chileren": null
+	             },
+		     {
+			"text": {
+				"name": "G322222",
+				"threat": "G322: Reach",
+				"asset": "G3222: store server A",
+				"target": "E3222: ",
+				"interval": "I32222: "
+			},
+			"HTMLclass": "",
+			"chileren": null
+	             },
+		     {
+			"text": {
+				"name": "G33333",
+				"threat": "G33333: Reach",
+				"asset": "G333333333: store server A",
+				"target": "E33333: ",
+				"interval": "I33333: "
+			},
+			"HTMLclass": "",
+			"chileren": [{
+				"text": {
+					"name": "GGGDDDDD",
+					"threat": "G3GGGDDDDD: Reach",
+					"asset": "G3GGGDDDDD: store server A",
+					"target": "E3GGGDDDDD: ",
+					"interval": "IGGGDDDDD: "
+				},
+				"HTMLclass": "",
+				"chileren": null
+	                 }]
+	             }
+	       ]
+	},
+	{"text": {
+			"name": "G44",
+			"threat": "T4: Reach",
+			"asset": "A4: store server A",
+			"target": "E4: ",
+			"interval": "I4: "
+		},
+		"HTMLclass": "and",
+		"chileren":null
+	 },
+	 {"text": {
+			"name": "G555",
+			"threat": "T55: Reach",
+			"asset": "A55: store server A",
+			"target": "E55: ",
+			"interval": "I4: "
+		},
+		"HTMLclass": "and",
+		"chileren": [{
+				"text": {
+					"name": "sdgsdg",
+					"threat": "fgdfgdf: Reach",
+					"asset": "hfggfh: store server A",
+					"target": "gjghjghjg: ",
+					"interval": "IGGdfgdfgdfGDDDDD: "
+				},
+				"HTMLclass": "",
+				"chileren": null
+	                 }]
+	 },
+	 {"text": {
+			"name": "G66",
+			"threat": "T66: Reach",
+			"asset": "A66: store server A",
+			"target": "E66: ",
+			"interval": "I66: "
+		},
+		"HTMLclass": "and",
+		"chileren":null
+	 },
+	 {"text": {
+			"name": "G777",
+			"threat": "T6G777: Reach",
+			"asset": "AG777: store server A",
+			"target": "EG777: ",
+			"interval": "IG777: "
+		},
+		"HTMLclass": "and",
+		"chileren":null
+	 },
+	 {"text": {
+			"name": "G888",
+			"threat": "TG888: Reach",
+			"asset": "AGG888: store server A",
+			"target": "EGG888: ",
+			"interval": "IG888: "
+		},
+		"HTMLclass": "and",
+		"chileren": [{
+				"text": {
+					"name": "付电话费",
+					"threat": "都是公司大: Reach",
+					"asset": "沙发上: store server A",
+					"target": "萨法: ",
+					"interval": "说过的: "
+				},
+				"HTMLclass": "",
+				"chileren": null
+	                 }]
+	 }
+     ]
+}]

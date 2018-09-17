@@ -1,0 +1,362 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>jQuery鼠标拖拽组织结构图代码</title>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/jquery.jOrgChart.css" />
+    <link rel="stylesheet" href="~/css/custom.css" />
+    <link href="~/css/prettify.css" type="~/css/text/css" rel="stylesheet" />
+    <script type="text/javascript" src="~/js/prettify.js"></script>
+ 
+    <script type="text/javascript" src="~/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery-ui.min.js"></script>
+    <script src="~/js/jquery.jOrgChart.js"></script>
+    <script src="~/js/ajaxfileupload.js"></script>
+    <link href="~/css/weui-min.css" rel="stylesheet" />
+    <script src="~/js/msgmanger.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            $("#org").jOrgChart({
+                chartElement: '#chart',
+                dragAndDrop: true
+            });
+        });
+    </script>
+    <style>
+        .ui-dialog {
+            width: 380px;
+            height: auto;
+            display: none;
+            position: absolute;
+            z-index: 9000;
+            top: 0px;
+            left: 0px;
+            border: 1px solid #D5D5D5;
+            background: #fff;
+        }
+
+            .ui-dialog a {
+                text-decoration: none;
+            }
+
+        .ui-dialog-title {
+            height: 48px;
+            line-height: 48px;
+            padding: 0px 20px;
+            color: #535353;
+            font-size: 16px;
+            border-bottom: 1px solid #efefef;
+            background: #f5f5f5;
+            cursor: move;
+            user-select: none;
+        }
+
+        .ui-dialog-closebutton {
+            width: 16px;
+            height: 16px;
+            display: block;
+            position: absolute;
+            top: 12px;
+            right: 20px;
+            background: url(../images/close_def.png) no-repeat;
+            cursor: pointer;
+        }
+
+            .ui-dialog-closebutton:hover {
+                background: url(../images/close_hov.png);
+            }
+
+        .ui-dialog-content {
+            padding: 15px 20px;
+        }
+
+        .ui-dialog-pt15 {
+            padding-top: 15px;
+        }
+
+        .ui-dialog-l40 {
+            height: 40px;
+            line-height: 40px;
+            text-align: right;
+        }
+
+        .ui-dialog-input {
+            width: 80%;
+            height: 40px;
+            margin: 0px;
+            padding: 0px;
+            border: 1px solid #d5d5d5;
+            font-size: 16px;
+            color: #c1c1c1;
+            text-indent: 25px;
+            outline: none;
+        }
+
+        .ui-dialog-input-username {
+            background: url(../images/input_username.png) no-repeat 2px;
+        }
+
+        .ui-dialog-input-password {
+            background: url(../images/input_password.png) no-repeat 2px;
+        }
+
+        .ui-dialog-submit {
+            width: 100%;
+            height: 50px;
+            background: #3b7ae3;
+            border: none;
+            font-size: 16px;
+            color: #fff;
+            outline: none;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            line-height: 50px;
+        }
+
+            .ui-dialog-submit:hover {
+                background: #3f81b0;
+            }
+
+        .ui-mask {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            position: absolute;
+            top: 0px;
+            height: 0px;
+            z-index: 8000;
+            opacity: 0.4;
+            filter: Alpha(opacity=40);
+        }
+    </style>
+</head>
+
+<body onload="prettyPrint();">
+
+    @*<div style="height:30px;width:100%"></div>*@
+    <ul id="org" style="display:none">
+        @Html.Raw(ViewBag.Str)
+        @*<li>
+            Food
+            <ul>
+                <li id="beer">G1</li>
+                <li>
+                    G2
+                    <ul>
+                        <li>G5</li>
+                        <li>
+                            <a href="http://sc.chinaz.com" target="_blank">G6</a>
+                            <p>G7</p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="fruit">
+                    G3
+                    <ul>
+                        <li>
+                            G8
+                            <ul>
+                                <li>G9</li>
+                            </ul>
+                        </li>
+                        <li>
+                            G10
+                            <ul>
+                                <li>
+                                    G11
+                                    <ul>
+                                        <li>G12</li>
+                                    </ul>
+                                </li>
+                                <li><img src="images/raspberry.jpg" alt="Raspberry" /></li>
+                                <li>G13</li>
+                                <li>G14</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>Bread</li>
+                <li class="collapsed">
+                    Chocolate
+                    <ul>
+                        <li>Topdeck</li>
+                        <li>Reese's Cups</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>*@
+    </ul>
+
+    <div id="chart" class="orgChart" style="width: 80%; overflow: auto; float: left; "></div>
+    <div style="float:left;width:19%">
+        <form id="form2">
+            <p style="margin-top:20px">
+                <input type="file" id="file1" name="file1" filetype="js,txt" style="width:100%" /><input type="button" class="shangchuan-left" onclick="fileupload('/home/upload', 'file1', 'img1')" value="上传js/txt文件" style="width:90px" />
+            </p>
+            <p><a id="img1" /></a><input type="hidden" id="fujianname" name="fujianname" /></p>
+        </form>
+        <a class="ui-dialog-submit" href="#" id="jiexiall" style="height: 28px;line-height: 28px;width:100%">整体分解</a>
+        <a class="ui-dialog-submit" href="#" id="qingli" style="height: 28px; line-height: 28px; width: 100%; margin-top: 20px; background:#7E97BF">清理数据</a>
+    </div>
+    <div class="ui-dialog" id="dialogMove" onselectstart='return false;'>
+        <div class="ui-dialog-title" id="dialogDrag" onselectstart="return false;">
+            保存结点信息
+            <a class="ui-dialog-closebutton" href="javascript:hideDialog();"></a>
+        </div>
+        <form id="form1">
+            <div class="ui-dialog-content">
+                <div class="ui-dialog-l40 ui-dialog-pt15">
+                    <label style="width:5%;text-align: center;">name*</label>
+                    <input type="hidden" id="oldname"  name="oldname"/>
+                    <input class="ui-dialog-input ui-dialog-input-username" id="name" name="name" type="text" tag="empty" msg="name 不允许为空" placeholder="" />
+                </div>
+                <div class="ui-dialog-l40 ui-dialog-pt15">
+                    <label style="width:5%;text-align: center;">threat</label>
+                    <input class="ui-dialog-input ui-dialog-input-password" type="text" id="threat" name="threat" placeholder="" />
+                </div>
+                <div class="ui-dialog-l40 ui-dialog-pt15">
+                    <label style="width:5%;text-align: center;">asset</label>
+                    <input class="ui-dialog-input ui-dialog-input-password" type="text"  id="asset" name="asset" placeholder="" />
+                </div>
+                <div class="ui-dialog-l40 ui-dialog-pt15">
+                    <label style="width:5%;text-align: center;">target</label>
+                    <input class="ui-dialog-input ui-dialog-input-password" type="text"  id="target" name="target" placeholder="" />
+                </div>
+                <div class="ui-dialog-l40 ui-dialog-pt15">
+                    <label style="width:5%;text-align: center;">interval</label>
+                    <input class="ui-dialog-input ui-dialog-input-password" type="text"  id="interval" name="interval"  placeholder="" />
+                </div>
+                <div class="ui-dialog-l40 ui-dialog-pt15">
+                    <a class="ui-dialog-submit" href="#" id="btnsend" style="width: 40%;float:left;">保存</a>
+                    <a class="ui-dialog-submit" href="#" style="width: 40%;margin-left:60%;background:#BDC1CA" onclick="hideDialog()">关闭</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        jQuery(document).ready(function () {
+            $(".orgChart").attr("style", "width:80%;overflow:auto;float:left;height:" + (document.documentElement.clientHeight-40) + "px");
+            /* Custom jQuery for the example */
+            var hrefs = location.href.indexOf("flag=") > 0 ? location.href.split("flag=")[1] : "0";
+            $("#jiexiall").html(hrefs == "0" ? "整体分解" : "单步分解");
+            $("#show-list").click(function (e) {
+                e.preventDefault();
+                $('#list-html').toggle('fast', function () {
+                    if ($(this).is(':visible')) {
+                        $('#show-list').text('Hide underlying list.');
+                        $(".topbar").fadeTo('fast', 0.9);
+                    } else {
+                        $('#show-list').text('Show underlying list.');
+                        $(".topbar").fadeTo('fast', 1);
+                    }
+                });
+            });
+
+            $('#list-html').text($('#org').html());
+
+            $("#org").bind("DOMSubtreeModified", function () {
+                $('#list-html').text('');
+
+                $('#list-html').text($('#org').html());
+
+                prettyPrint();
+            });
+            $(".ui-draggable").dblclick(function () {
+                $(".ui-draggable").removeClass("currentnode");
+                $(".ui-draggable").removeClass("node").addClass("node");
+                $(this).removeClass("node");
+                $(this).removeClass("currentnode").addClass("currentnode");
+                var bodyW = document.documentElement.clientWidth;
+                var bodyH = document.documentElement.clientHeight;
+                var elW = $("#dialogMove").width();
+                var elH = $("#dialogMove").height();
+                $("#dialogMove").css("margin-left", (bodyW - elW) / 2 + 'px');
+                $("#dialogMove").css("margin-top", (bodyH - elH) / 2 + 'px');
+                $("#dialogMove").show();
+                //获取双击后该节点的相关信息
+                $.get("/home/getnodeinfo?name=" + escape($(this).text().replace("↑", "")), function (a) {
+                    var data = eval("(" + a + ")");
+                    $("#oldname").val(data.name);
+                    $("#name").val(data.name);
+                    $("#threat").val(data.threat);
+                    $("#asset").val(data.asset);
+                    $("#target").val(data.target);
+                    $("#interval").val(data.interval);
+                });
+            })
+            var $array = $("li[litag^=collapsed_]");
+            var stror = "";
+            for (var t = 0; t < $array.length; t++) {
+                var tempstr = $array.eq(t).attr("litag").replace("collapsed_","");//.split("_")[2] + "_" + $array.eq(t).attr("litag").split("_")[3];
+                stror += tempstr.replace(" ","") + (t < $array.length - 1 ? "," : "");
+            }
+            var $array2 = $("div[class*=ui-draggable]");
+            for (var t = 0; t < $array2.length; t++) {
+                var text = $array2.eq(t).text().replace(" ", "");
+                var existstr = isexist(stror, text);
+                var tag1=existstr.split("_")[0];
+                if (existstr.indexOf("_")>0) {
+                     $array2.eq(t).append("<p>↑</p>");
+                }
+                if (existstr != "") {
+                    if (tag1 == "Or" || tag1 == "or") {
+                        var tempstr1 = $array2.eq(t).parent().parent().next();
+                        var tempstr2 = tempstr1.next();
+                        var array3 = tempstr2.find("td");
+                        for (var k = 0; k < array3.length; k++) {
+                            tempstr1.find(".down").css({ "background-color": "#13B3A4", "padding-top": "5px" }).html("OR");
+                            //以下是给结点上方的与跟或关系加线条颜色跟边框 OR关系
+                            for (var k = 0; k < array3.length; k++) {
+                                if(k==0){
+                                    tempstr2.find("td").eq(0).css("border-right", "1px solid #13B3A4");
+                                }
+                                else if (k % 2 == 0) {
+                                    tempstr2.find("td").eq(k).css({ "border-right": "1px solid #13B3A4", "border-top": "2px solid #13B3A4" });
+                                } else if (k % 2 == 1 && k != array3.length - 1) {
+                                    tempstr2.find("td").eq(k).css({ "border-left": "1px solid #13B3A4", "border-top": "2px solid #13B3A4" });
+                                } else if (k == array3.length - 1) {
+                                    tempstr2.find("td").eq(k).css({ "border-left": "1px solid #13B3A4"});
+                                }
+                            }
+                        }
+                    } else {
+                        //And关系
+                        var tempstr1 = $array2.eq(t).parent().parent().next();
+                        tempstr1.find(".down").css({ "padding-top": "5px" }).html("AND");
+                    }
+                }
+            }
+        });
+        $("#btnsend").click(function () {
+            $.yanzheng("/home/savenodeinfo", "#form1", "/home/index");
+        })
+        $("#qingli").click(function () {
+            location.href = "/home/qingli";
+        })
+        $("#jiexiall").click(function () {
+            var href = location.href.indexOf("flag=")>0 ?location.href.split("flag=")[1]:"0";
+            href = href != "0" ? "0" : "1";
+            location.href = "/home/index?flag=" + href;
+        })
+        function hideDialog() {
+            $("#form1")[0].reset();
+            $("#dialogMove").hide();
+        }
+        function isexist(str, flag) {
+            var ret ="";
+            var array = str.split(',');
+            for (var t = 0; t < array.length; t++) {
+                var array2 = array[t].split("_");
+                if (array2[1]== flag) {
+                    ret = array2[0] + "_" + array2[2];
+                    break;
+                }
+            }
+            return ret;
+        }
+    </script>
+</body>
+</html>
